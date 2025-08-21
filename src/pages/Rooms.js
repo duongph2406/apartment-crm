@@ -75,10 +75,26 @@ const Rooms = () => {
   const canEdit = user?.role === 'admin';
 
   return (
-    <Box>
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', color: '#333' }}>
-        Quản lý Phòng
-      </Typography>
+    <Box className="fade-in-up">
+      <Box sx={{ mb: 4 }}>
+        <Typography 
+          variant="h4" 
+          sx={{ 
+            fontWeight: 700, 
+            color: '#1e293b',
+            mb: 1,
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}
+        >
+          Quản lý Phòng
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem' }}>
+          Quản lý thông tin và trạng thái các phòng trong tòa nhà
+        </Typography>
+      </Box>
 
       <Grid container spacing={3}>
         {rooms.map((room) => {
@@ -87,14 +103,12 @@ const Rooms = () => {
           return (
             <Grid item xs={12} sm={6} md={4} lg={3} key={room.id}>
               <Card 
+                className="modern-card"
                 sx={{ 
                   height: '100%',
                   cursor: 'pointer',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: 4
-                  }
+                  position: 'relative',
+                  overflow: 'hidden'
                 }}
                 onClick={() => handleRoomClick(room)}
               >

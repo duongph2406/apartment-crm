@@ -131,67 +131,172 @@ const Contracts = () => {
   };
 
   return (
-    <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#333' }}>
-          Quản lý Hợp đồng
-        </Typography>
+    <Box className="fade-in-up">
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+        <Box>
+          <Typography 
+            variant="h4" 
+            sx={{ 
+              fontWeight: 700, 
+              color: '#1e293b',
+              mb: 1,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}
+          >
+            Quản lý Hợp đồng
+          </Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem' }}>
+            Quản lý hợp đồng thuê và thời hạn
+          </Typography>
+        </Box>
         {canEdit && (
           <Button
             variant="contained"
             startIcon={<Add />}
             onClick={handleAdd}
-            sx={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+            className="btn-modern"
+            sx={{ 
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: 3,
+              px: 3,
+              py: 1.5,
+              textTransform: 'none',
+              fontWeight: 600,
+              fontSize: '1rem'
+            }}
           >
             Tạo hợp đồng mới
           </Button>
         )}
       </Box>
 
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className="modern-card" sx={{ borderRadius: 4, overflow: 'hidden' }}>
         <Table>
           <TableHead>
-            <TableRow sx={{ bgcolor: '#f5f5f5' }}>
-              <TableCell sx={{ fontWeight: 'bold' }}>Mã HĐ</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Khách thuê</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Phòng</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Ngày bắt đầu</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Ngày kết thúc</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Tiền thuê</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Trạng thái</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Thao tác</TableCell>
+            <TableRow sx={{ 
+              background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+              '& .MuiTableCell-head': {
+                fontWeight: 700,
+                color: '#1e293b',
+                fontSize: '0.95rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px'
+              }
+            }}>
+              <TableCell>Mã HĐ</TableCell>
+              <TableCell>Khách thuê</TableCell>
+              <TableCell>Phòng</TableCell>
+              <TableCell>Ngày bắt đầu</TableCell>
+              <TableCell>Ngày kết thúc</TableCell>
+              <TableCell>Tiền thuê</TableCell>
+              <TableCell>Trạng thái</TableCell>
+              <TableCell>Thao tác</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {contracts.map((contract) => (
-              <TableRow key={contract.id} hover>
-                <TableCell>{contract.id}</TableCell>
-                <TableCell>{getTenantName(contract.tenantId)}</TableCell>
-                <TableCell>{getRoomInfo(contract.roomId)}</TableCell>
-                <TableCell>{contract.startDate}</TableCell>
-                <TableCell>{contract.endDate}</TableCell>
-                <TableCell>{contract.monthlyRent.toLocaleString()}đ</TableCell>
+            {contracts.map((contract, index) => (
+              <TableRow 
+                key={contract.id} 
+                hover
+                sx={{
+                  '&:hover': {
+                    backgroundColor: 'rgba(102, 126, 234, 0.05)',
+                    transform: 'scale(1.01)',
+                    transition: 'all 0.2s ease'
+                  },
+                  '& .MuiTableCell-root': {
+                    borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                    py: 2,
+                    fontSize: '0.95rem'
+                  }
+                }}
+              >
+                <TableCell>
+                  <Box sx={{ 
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    color: 'white',
+                    borderRadius: 3,
+                    px: 1.5,
+                    py: 0.5,
+                    display: 'inline-block',
+                    fontWeight: 600,
+                    fontSize: '0.875rem'
+                  }}>
+                    #{contract.id}
+                  </Box>
+                </TableCell>
+                <TableCell sx={{ fontWeight: 600, color: '#1e293b' }}>
+                  {getTenantName(contract.tenantId)}
+                </TableCell>
+                <TableCell sx={{ fontWeight: 500, color: '#475569' }}>
+                  {getRoomInfo(contract.roomId)}
+                </TableCell>
+                <TableCell sx={{ color: '#64748b' }}>{contract.startDate}</TableCell>
+                <TableCell sx={{ color: '#64748b' }}>{contract.endDate}</TableCell>
+                <TableCell sx={{ fontWeight: 600, color: '#059669' }}>
+                  {contract.monthlyRent.toLocaleString()}đ
+                </TableCell>
                 <TableCell>
                   <Chip
                     label={getStatusText(contract.status)}
                     color={getStatusColor(contract.status)}
                     size="small"
+                    sx={{ 
+                      fontWeight: 600,
+                      borderRadius: 3,
+                      height: 28
+                    }}
                   />
                 </TableCell>
                 <TableCell>
-                  <IconButton onClick={() => handleView(contract)} size="small">
-                    <Visibility />
-                  </IconButton>
-                  {canEdit && (
-                    <IconButton onClick={() => handleEdit(contract)} size="small">
-                      <Edit />
+                  <Box sx={{ display: 'flex', gap: 0.5 }}>
+                    <IconButton 
+                      onClick={() => handleView(contract)} 
+                      size="small"
+                      sx={{
+                        color: '#667eea',
+                        '&:hover': {
+                          backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                          transform: 'scale(1.1)'
+                        }
+                      }}
+                    >
+                      <Visibility />
                     </IconButton>
-                  )}
-                  {canDelete && (
-                    <IconButton onClick={() => handleDelete(contract.id)} size="small" color="error">
-                      <Delete />
-                    </IconButton>
-                  )}
+                    {canEdit && (
+                      <IconButton 
+                        onClick={() => handleEdit(contract)} 
+                        size="small"
+                        sx={{
+                          color: '#f59e0b',
+                          '&:hover': {
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            transform: 'scale(1.1)'
+                          }
+                        }}
+                      >
+                        <Edit />
+                      </IconButton>
+                    )}
+                    {canDelete && (
+                      <IconButton 
+                        onClick={() => handleDelete(contract.id)} 
+                        size="small" 
+                        sx={{
+                          color: '#ef4444',
+                          '&:hover': {
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            transform: 'scale(1.1)'
+                          }
+                        }}
+                      >
+                        <Delete />
+                      </IconButton>
+                    )}
+                  </Box>
                 </TableCell>
               </TableRow>
             ))}

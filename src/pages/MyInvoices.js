@@ -64,59 +64,108 @@ const MyInvoices = () => {
   const totalOverdue = userInvoices.filter(inv => inv.status === 'overdue').reduce((sum, inv) => sum + inv.total, 0);
 
   return (
-    <Box>
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', color: '#333' }}>
-        Hóa đơn của tôi
-      </Typography>
+    <Box className="fade-in-up">
+      <Box sx={{ mb: 4 }}>
+        <Typography 
+          variant="h4" 
+          sx={{ 
+            fontWeight: 700, 
+            color: '#1e293b',
+            mb: 1,
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}
+        >
+          Hóa đơn của tôi
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem' }}>
+          Theo dõi hóa đơn và lịch sử thanh toán
+        </Typography>
+      </Box>
 
       {/* Statistics Cards */}
-      <Grid container spacing={3} sx={{ mb: 3 }}>
+      <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={4}>
-          <Card sx={{ background: 'linear-gradient(135deg, #4caf50 0%, #45a049 100%)', color: 'white' }}>
-            <CardContent>
+          <Card className="modern-card" sx={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', position: 'relative', overflow: 'hidden' }}>
+            <CardContent sx={{ p: 3 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Box>
-                  <Typography variant="h6">Đã thanh toán</Typography>
-                  <Typography variant="h4">{totalPaid.toLocaleString()}đ</Typography>
-                  <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                  <Typography variant="body2" sx={{ opacity: 0.9, fontWeight: 500, mb: 1 }}>
+                    Đã thanh toán
+                  </Typography>
+                  <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
+                    {totalPaid.toLocaleString()}đ
+                  </Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.8, fontSize: '0.875rem' }}>
                     {userInvoices.filter(inv => inv.status === 'paid').length} hóa đơn
                   </Typography>
                 </Box>
-                <Payment sx={{ fontSize: 40, opacity: 0.8 }} />
+                <Box sx={{ 
+                  background: 'rgba(255,255,255,0.15)', 
+                  borderRadius: '16px', 
+                  p: 2,
+                  backdropFilter: 'blur(10px)'
+                }}>
+                  <Payment sx={{ fontSize: 32 }} />
+                </Box>
               </Box>
             </CardContent>
           </Card>
         </Grid>
 
         <Grid item xs={12} sm={4}>
-          <Card sx={{ background: 'linear-gradient(135deg, #ff9800 0%, #f57c00 100%)', color: 'white' }}>
-            <CardContent>
+          <Card className="modern-card" sx={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: 'white', position: 'relative', overflow: 'hidden' }}>
+            <CardContent sx={{ p: 3 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Box>
-                  <Typography variant="h6">Chờ thanh toán</Typography>
-                  <Typography variant="h4">{totalPending.toLocaleString()}đ</Typography>
-                  <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                  <Typography variant="body2" sx={{ opacity: 0.9, fontWeight: 500, mb: 1 }}>
+                    Chờ thanh toán
+                  </Typography>
+                  <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
+                    {totalPending.toLocaleString()}đ
+                  </Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.8, fontSize: '0.875rem' }}>
                     {userInvoices.filter(inv => inv.status === 'pending').length} hóa đơn
                   </Typography>
                 </Box>
-                <Receipt sx={{ fontSize: 40, opacity: 0.8 }} />
+                <Box sx={{ 
+                  background: 'rgba(255,255,255,0.15)', 
+                  borderRadius: '16px', 
+                  p: 2,
+                  backdropFilter: 'blur(10px)'
+                }}>
+                  <Receipt sx={{ fontSize: 32 }} />
+                </Box>
               </Box>
             </CardContent>
           </Card>
         </Grid>
 
         <Grid item xs={12} sm={4}>
-          <Card sx={{ background: 'linear-gradient(135deg, #f44336 0%, #d32f2f 100%)', color: 'white' }}>
-            <CardContent>
+          <Card className="modern-card" sx={{ background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', color: 'white', position: 'relative', overflow: 'hidden' }}>
+            <CardContent sx={{ p: 3 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Box>
-                  <Typography variant="h6">Quá hạn</Typography>
-                  <Typography variant="h4">{totalOverdue.toLocaleString()}đ</Typography>
-                  <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                  <Typography variant="body2" sx={{ opacity: 0.9, fontWeight: 500, mb: 1 }}>
+                    Quá hạn
+                  </Typography>
+                  <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
+                    {totalOverdue.toLocaleString()}đ
+                  </Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.8, fontSize: '0.875rem' }}>
                     {userInvoices.filter(inv => inv.status === 'overdue').length} hóa đơn
                   </Typography>
                 </Box>
-                <Receipt sx={{ fontSize: 40, opacity: 0.8 }} />
+                <Box sx={{ 
+                  background: 'rgba(255,255,255,0.15)', 
+                  borderRadius: '16px', 
+                  p: 2,
+                  backdropFilter: 'blur(10px)'
+                }}>
+                  <Receipt sx={{ fontSize: 32 }} />
+                </Box>
               </Box>
             </CardContent>
           </Card>
@@ -124,11 +173,14 @@ const MyInvoices = () => {
       </Grid>
 
       {/* Invoices Table */}
-      <Card>
-        <CardContent>
-          <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold' }}>
-            Danh sách hóa đơn
-          </Typography>
+      <Card className="modern-card">
+        <CardContent sx={{ p: 4 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+            <Receipt sx={{ mr: 2, color: '#667eea', fontSize: 28 }} />
+            <Typography variant="h5" sx={{ fontWeight: 700, color: '#1e293b' }}>
+              Danh sách hóa đơn
+            </Typography>
+          </Box>
           
           <TableContainer>
             <Table>

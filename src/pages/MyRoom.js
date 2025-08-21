@@ -32,44 +32,94 @@ const MyRoom = () => {
   }
 
   return (
-    <Box>
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', color: '#333' }}>
-        Thông tin phòng của tôi
-      </Typography>
+    <Box className="fade-in-up">
+      <Box sx={{ mb: 4 }}>
+        <Typography 
+          variant="h4" 
+          sx={{ 
+            fontWeight: 700, 
+            color: '#1e293b',
+            mb: 1,
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}
+        >
+          Thông tin phòng của tôi
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem' }}>
+          Chi tiết thông tin phòng và tiện nghi
+        </Typography>
+      </Box>
 
       <Grid container spacing={3}>
         {/* Room Information */}
         <Grid item xs={12} md={6}>
-          <Card sx={{ height: '100%' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                <Avatar sx={{ bgcolor: '#667eea', mr: 2 }}>
-                  <Home />
-                </Avatar>
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Card className="modern-card" sx={{ height: '100%' }}>
+            <CardContent sx={{ p: 4 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
+                <Box
+                  sx={{
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    borderRadius: '20px',
+                    p: 2,
+                    mr: 3,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 8px 32px rgba(102, 126, 234, 0.3)'
+                  }}
+                >
+                  <Home sx={{ color: 'white', fontSize: 32 }} />
+                </Box>
+                <Typography variant="h4" sx={{ fontWeight: 700, color: '#1e293b' }}>
                   Phòng {userRoom.id}
                 </Typography>
               </Box>
 
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="body1" sx={{ mb: 1 }}>
-                  <strong>Diện tích:</strong> {userRoom.area}m²
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 1 }}>
-                  <strong>Tầng:</strong> {userRoom.floor}
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 1 }}>
-                  <strong>Giá thuê:</strong> {userRoom.price.toLocaleString()}đ/tháng
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 1 }}>
-                  <strong>Trạng thái:</strong> 
+              <Box sx={{ space: 3 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2, bgcolor: '#f8fafc', borderRadius: 4, mb: 2 }}>
+                  <Typography variant="body1" sx={{ fontWeight: 600, color: '#475569' }}>
+                    Diện tích:
+                  </Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 700, color: '#1e293b' }}>
+                    {userRoom.area}m²
+                  </Typography>
+                </Box>
+                
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2, bgcolor: '#f8fafc', borderRadius: 4, mb: 2 }}>
+                  <Typography variant="body1" sx={{ fontWeight: 600, color: '#475569' }}>
+                    Tầng:
+                  </Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 700, color: '#1e293b' }}>
+                    Tầng {userRoom.floor}
+                  </Typography>
+                </Box>
+                
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2, bgcolor: '#f8fafc', borderRadius: 4, mb: 2 }}>
+                  <Typography variant="body1" sx={{ fontWeight: 600, color: '#475569' }}>
+                    Giá thuê:
+                  </Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 700, color: '#059669' }}>
+                    {userRoom.price.toLocaleString()}đ/tháng
+                  </Typography>
+                </Box>
+                
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2, bgcolor: '#f8fafc', borderRadius: 4 }}>
+                  <Typography variant="body1" sx={{ fontWeight: 600, color: '#475569' }}>
+                    Trạng thái:
+                  </Typography>
                   <Chip 
                     label="Đang thuê" 
                     color="success" 
-                    size="small" 
-                    sx={{ ml: 1 }}
+                    sx={{ 
+                      fontWeight: 600,
+                      borderRadius: 3,
+                      height: 32
+                    }}
                   />
-                </Typography>
+                </Box>
               </Box>
             </CardContent>
           </Card>
@@ -77,13 +127,24 @@ const MyRoom = () => {
 
         {/* Tenant Information */}
         <Grid item xs={12} md={6}>
-          <Card sx={{ height: '100%' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                <Avatar sx={{ bgcolor: '#764ba2', mr: 2 }}>
-                  <Person />
-                </Avatar>
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Card className="modern-card" sx={{ height: '100%' }}>
+            <CardContent sx={{ p: 4 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
+                <Box
+                  sx={{
+                    background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
+                    borderRadius: '20px',
+                    p: 2,
+                    mr: 3,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 8px 32px rgba(118, 75, 162, 0.3)'
+                  }}
+                >
+                  <Person sx={{ color: 'white', fontSize: 32 }} />
+                </Box>
+                <Typography variant="h5" sx={{ fontWeight: 700, color: '#1e293b' }}>
                   Thông tin cá nhân
                 </Typography>
               </Box>
@@ -182,36 +243,36 @@ const MyRoom = () => {
               
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ textAlign: 'center', p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+                  <Box sx={{ textAlign: 'center', p: 2, bgcolor: '#f8fafc', borderRadius: 3 }}>
                     <Typography variant="body2">Điều hòa</Typography>
-                    <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#4caf50' }}>
+                    <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#10b981' }}>
                       ✓ Có
                     </Typography>
                   </Box>
                 </Grid>
                 
                 <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ textAlign: 'center', p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+                  <Box sx={{ textAlign: 'center', p: 2, bgcolor: '#f8fafc', borderRadius: 3 }}>
                     <Typography variant="body2">Nóng lạnh</Typography>
-                    <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#4caf50' }}>
+                    <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#10b981' }}>
                       ✓ Có
                     </Typography>
                   </Box>
                 </Grid>
                 
                 <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ textAlign: 'center', p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+                  <Box sx={{ textAlign: 'center', p: 2, bgcolor: '#f8fafc', borderRadius: 3 }}>
                     <Typography variant="body2">Internet</Typography>
-                    <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#4caf50' }}>
+                    <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#10b981' }}>
                       ✓ Có
                     </Typography>
                   </Box>
                 </Grid>
                 
                 <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ textAlign: 'center', p: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+                  <Box sx={{ textAlign: 'center', p: 2, bgcolor: '#f8fafc', borderRadius: 3 }}>
                     <Typography variant="body2">Gửi xe</Typography>
-                    <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#4caf50' }}>
+                    <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#10b981' }}>
                       ✓ Có
                     </Typography>
                   </Box>

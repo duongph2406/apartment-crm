@@ -126,17 +126,42 @@ const Tenants = () => {
   };
 
   return (
-    <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#333' }}>
-          Quản lý Khách thuê
-        </Typography>
+    <Box className="fade-in-up">
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+        <Box>
+          <Typography 
+            variant="h4" 
+            sx={{ 
+              fontWeight: 700, 
+              color: '#1e293b',
+              mb: 1,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}
+          >
+            Quản lý Khách thuê
+          </Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem' }}>
+            Quản lý thông tin khách thuê và hợp đồng
+          </Typography>
+        </Box>
         {canEdit && (
           <Button
             variant="contained"
             startIcon={<Add />}
             onClick={handleAdd}
-            sx={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+            className="btn-modern"
+            sx={{ 
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: 3,
+              px: 3,
+              py: 1.5,
+              textTransform: 'none',
+              fontWeight: 600,
+              fontSize: '1rem'
+            }}
           >
             Thêm khách thuê
           </Button>
@@ -150,68 +175,98 @@ const Tenants = () => {
           return (
             <Grid item xs={12} sm={6} md={4} key={tenant.id}>
               <Card 
+                className="modern-card"
                 sx={{ 
                   height: '100%',
                   cursor: 'pointer',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: 4
-                  }
+                  position: 'relative',
+                  overflow: 'hidden'
                 }}
                 onClick={() => handleView(tenant)}
               >
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Avatar sx={{ mr: 2, bgcolor: '#667eea' }}>
-                      <Person />
-                    </Avatar>
+                <CardContent sx={{ p: 3 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                    <Box
+                      sx={{
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        borderRadius: '20px',
+                        p: 1.5,
+                        mr: 2,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <Person sx={{ color: 'white', fontSize: 24 }} />
+                    </Box>
                     <Box sx={{ flexGrow: 1 }}>
-                      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                      <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.5, color: '#1e293b' }}>
                         {tenant.name}
                       </Typography>
                       <Chip
                         label={getStatusText(tenant.status)}
                         color={getStatusColor(tenant.status)}
                         size="small"
+                        sx={{ 
+                          fontWeight: 600,
+                          borderRadius: 3,
+                          height: 24
+                        }}
                       />
                     </Box>
                   </Box>
 
-                  <Box sx={{ mb: 2 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                      <Phone sx={{ mr: 1, fontSize: 16, color: 'text.secondary' }} />
-                      <Typography variant="body2" color="text.secondary">
+                  <Box sx={{ mb: 3 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, p: 1.5, bgcolor: '#f8fafc', borderRadius: 3 }}>
+                      <Phone sx={{ mr: 2, fontSize: 18, color: '#667eea' }} />
+                      <Typography variant="body2" sx={{ fontWeight: 500, color: '#475569' }}>
                         {tenant.phone}
                       </Typography>
                     </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                      <Email sx={{ mr: 1, fontSize: 16, color: 'text.secondary' }} />
-                      <Typography variant="body2" color="text.secondary">
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, p: 1.5, bgcolor: '#f8fafc', borderRadius: 3 }}>
+                      <Email sx={{ mr: 2, fontSize: 18, color: '#667eea' }} />
+                      <Typography variant="body2" sx={{ fontWeight: 500, color: '#475569' }}>
                         {tenant.email}
                       </Typography>
                     </Box>
                   </Box>
 
                   {room && (
-                    <Box sx={{ p: 1, bgcolor: '#f5f5f5', borderRadius: 1 }}>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                        Phòng: {room.id}
+                    <Box 
+                      sx={{ 
+                        p: 2, 
+                        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)', 
+                        borderRadius: 3,
+                        border: '1px solid rgba(102, 126, 234, 0.2)',
+                        mb: 2
+                      }}
+                    >
+                      <Typography variant="body2" sx={{ fontWeight: 700, color: '#667eea', mb: 0.5 }}>
+                        Phòng {room.id}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Diện tích: {room.area}m² - {room.price.toLocaleString()}đ
+                      <Typography variant="body2" sx={{ color: '#64748b', fontWeight: 500 }}>
+                        {room.area}m² • {room.price.toLocaleString()}đ/tháng
                       </Typography>
                     </Box>
                   )}
 
                   {canEdit && (
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2, gap: 1 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
                       <Button
                         size="small"
                         startIcon={<Edit />}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleEdit(tenant);
+                        }}
+                        sx={{
+                          borderRadius: 2,
+                          textTransform: 'none',
+                          fontWeight: 600,
+                          color: '#667eea',
+                          '&:hover': {
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)'
+                          }
                         }}
                       >
                         Sửa
@@ -224,6 +279,14 @@ const Tenants = () => {
                           onClick={(e) => {
                             e.stopPropagation();
                             handleDelete(tenant.id);
+                          }}
+                          sx={{
+                            borderRadius: 2,
+                            textTransform: 'none',
+                            fontWeight: 600,
+                            '&:hover': {
+                              backgroundColor: 'rgba(239, 68, 68, 0.1)'
+                            }
                           }}
                         >
                           Xóa
